@@ -1,7 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ProductController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,14 +15,23 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Route::get('/', function () {
+//     return view('pages.user.dashboard', ['type_menu' => '']);
+// });
+
+
+
 Route::get('/', function () {
-    return view('pages.blank-page', ['type_menu' => '']);
+    return view('pages.auth.login');
 });
 
-Route::get('/login', function () {
-    return view('pages.auth-login', ['type_menu' => '']);
-});
+Route::middleware(['auth'])->group(function(){
 
-Route::get('/register', function () {
-    return view('pages.auth-register', ['type_menu' => '']);
+    Route::get('/home',function(){
+        return view('pages.dashboard');
+    })->name('home');
+
+    Route::resource('user', UserController::class);
+    Route::resource('category', CategoryController::class);
+    Route::resource('product', ProductController::class);
 });
