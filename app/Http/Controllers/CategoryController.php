@@ -24,20 +24,39 @@ class CategoryController extends Controller
     //store
     public function store(Request $request)
     {
-        $request->validate([
-            'category_name' => 'required',
-            'category_image' => 'required|image|mimes:png,jpg,jpeg'
+        $validated = $request->validate([
+            'category_name' => 'required|max:100',
         ]);
 
-        $filename = time() . '.' . $request->image->extension();
-        $request->image->storeAs('public/category', $filename);
-        $data = $request->all();
+        $category = Category::create($validated);
 
-        $category = new Category;
-        $category->category_name = $request->category_name;
-        $category->category_image = $filename;
-        $category->save();
+        return redirect()->route('category.index')->with('success', 'Category created successfully');
+    }
 
-        return redirect()->route('category.index');
+    //edit
+    public function edit($id)
+    {
+        $category = Category::findOrFail($id);
+        return view('pages.category.edit', compact('category'));
+    }
+
+    //update
+    public function update(Request $request,$id)
+    {
+        $validated = $request->validate([
+            'category_name' => 'required|max:100',
+        ]);
+        $category = Category::findOrFail($id);
+        $category->update($validated);
+
+        return redirect()->route('category.index')->with('success', 'Category updated successfully');
+    }
+
+    //destroy
+    public function destroy($id)
+    {
+        $category = Category::findOrFail($id);
+        $category->delete();
+        return redirect()->route('category.index')->with('success', 'Category deleted successfully');
     }
 }

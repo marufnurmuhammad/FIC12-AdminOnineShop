@@ -15,54 +15,50 @@
 @section('main')
     <div class="main-content">
         <section class="section">
+            <div class="section-header">
+                <h1>Advanced Forms</h1>
+                <div class="section-header-breadcrumb">
+                    <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
+                    <div class="breadcrumb-item"><a href="#">Forms</a></div>
+                    <div class="breadcrumb-item">Category</div>
+                </div>
+            </div>
 
             <div class="section-body">
                 <h2 class="section-title">Category</h2>
-            </div>
 
-            <div class="card">
-                <form action="{{ route('category.store') }}" method="POST">
-                    @csrf
-                    <div class="card-header">
-                        <h4>Input Text</h4>
-                    </div>
-                    <div class="card-body">
-                        <div class="form-group">
-                            <label>Category Name</label>
-                            <input type="text"
-                                class="form-control @error('category_name')
+
+
+                <div class="card">
+                    <form action="{{ route('category.store') }}" method="POST">
+                        @csrf
+                        <div class="card-header">
+                            <h4>Input Text</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label>Name</label>
+                                <input type="text"
+                                    class="form-control @error('category_name')
                                 is-invalid
                             @enderror"
-                                name="category_name">
-                            @error('category_name')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
-                        </div>
-
-                        <div class="form-group">
-                            <label>Image</label>
-                            <div class="col-sm-9">
-                                <input type="file" class="form-control" name="category_image"
-                                    @error('category_image') is-invalid @enderror>
+                                    name="category_name">
+                                @error('category_name')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
                             </div>
-                            @error('category_image')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
+
                         </div>
+                        <div class="card-footer text-right">
+                            <button class="btn btn-primary">Submit</button>
+                        </div>
+                    </form>
+                </div>
 
-                    </div>
-                    <div class="card-footer text-right">
-                        <button class="btn btn-primary">Submit</button>
-                    </div>
-                </form>
             </div>
-
-    </div>
-    </section>
+        </section>
     </div>
 @endsection
 

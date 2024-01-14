@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Users')
+@section('title', 'Category')
 
 @push('style')
     <!-- CSS Libraries -->
@@ -16,11 +16,11 @@
 
             </div>
             <div class="section-body">
-                {{-- <div class="row">
+                <div class="row">
                     <div class="col-12">
                         @include('layouts.alert')
                     </div>
-                </div> --}}
+                </div>
 
 
 
@@ -38,7 +38,7 @@
 
                                 </div>
                                 <div class="float-right">
-                                    <form method="GET" action="{{ route('user.index') }}">
+                                    <form method="GET" action="{{ route('category.index') }}">
                                         <div class="input-group">
                                             <input type="text" class="form-control" placeholder="Search" name="search">
                                             <div class="input-group-append">
@@ -68,13 +68,13 @@
 
                                                 <td>
                                                     <div class="d-flex justify-content-center">
-                                                        <a href='{{ route('user.edit', $category->id) }}'
+                                                        <a href='{{ route('category.edit', $category->id) }}'
                                                             class="btn btn-sm btn-info btn-icon">
                                                             <i class="fas fa-edit"></i>
                                                             Edit
                                                         </a>
 
-                                                        <form action="{{ route('user.destroy', $category->id) }}"
+                                                        <form action="{{ route('category.destroy', $category->id) }}"
                                                             method="POST" class="ml-2">
                                                             <input type="hidden" name="_method" value="DELETE" />
                                                             <input type="hidden" name="_token"
